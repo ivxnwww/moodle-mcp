@@ -36,9 +36,9 @@ Necesitas:
 
 - **Python 3.10 o superior**
 - **Claude Code o Claude Desktop**
-- Tu **usuario y contraseña** de Moodle, y la dirección de tu Moodle (p. ej. `https://moodle.tu-escuela.edu`)
+- Tu **usuario y contraseña** de Moodle, y la dirección de tu Moodle (p. ej. `https://mi.cugdl.udg.mx`)
 
-En los pasos se usa `https://moodle.tu-escuela.edu` como ejemplo. Cámbiala siempre por la de tu escuela.
+En los pasos se usa `https://mi.cugdl.udg.mx` (Moodle de CUGDL, UdeG) como ejemplo. Si tu escuela es otra, cámbiala por la dirección de tu Moodle.
 
 ### Windows
 
@@ -70,7 +70,7 @@ py -m venv .venv
 **4. Consigue tu token de Moodle y guárdalo.** Cambia la dirección, el usuario y la contraseña:
 
 ```powershell
-$r = Invoke-RestMethod -Method Post -Uri "https://moodle.tu-escuela.edu/login/token.php" -Body @{
+$r = Invoke-RestMethod -Method Post -Uri "https://mi.cugdl.udg.mx/login/token.php" -Body @{
   username = "TU_USUARIO"; password = "TU_CONTRASEÑA"; service = "moodle_mobile_app"
 }
 $r
@@ -87,7 +87,7 @@ Si en cambio aparece un `error`, revisa [Problemas comunes](#problemas-comunes).
 **5. Prueba que funciona:**
 
 ```powershell
-$env:MOODLE_URL = "https://moodle.tu-escuela.edu"
+$env:MOODLE_URL = "https://mi.cugdl.udg.mx"
 .venv\Scripts\python.exe -c "import server; print(server.info_usuario())"
 ```
 
@@ -98,7 +98,7 @@ Debe mostrar tu nombre y el de tu escuela.
 - **Claude Code:**
 
   ```powershell
-  claude mcp add --scope user moodle -e MOODLE_URL=https://moodle.tu-escuela.edu -- "$HOME\moodle-mcp\.venv\Scripts\python.exe" "$HOME\moodle-mcp\server.py"
+  claude mcp add --scope user moodle -e MOODLE_URL=https://mi.cugdl.udg.mx -- "$HOME\moodle-mcp\.venv\Scripts\python.exe" "$HOME\moodle-mcp\server.py"
   ```
 
 - **Claude Desktop:** abre **Configuración → Desarrollador → Editar configuración** (el archivo es `%APPDATA%\Claude\claude_desktop_config.json`) y agrega esto. Cambia `TU_USUARIO_DE_WINDOWS` y usa `/` en las rutas:
@@ -109,7 +109,7 @@ Debe mostrar tu nombre y el de tu escuela.
       "moodle": {
         "command": "C:/Users/TU_USUARIO_DE_WINDOWS/moodle-mcp/.venv/Scripts/python.exe",
         "args": ["C:/Users/TU_USUARIO_DE_WINDOWS/moodle-mcp/server.py"],
-        "env": { "MOODLE_URL": "https://moodle.tu-escuela.edu" }
+        "env": { "MOODLE_URL": "https://mi.cugdl.udg.mx" }
       }
     }
   }
@@ -149,7 +149,7 @@ python3 -m venv .venv
 **4. Consigue tu token de Moodle.** Cambia la dirección, el usuario y la contraseña:
 
 ```sh
-curl -s -X POST https://moodle.tu-escuela.edu/login/token.php \
+curl -s -X POST https://mi.cugdl.udg.mx/login/token.php \
   --data-urlencode "username=TU_USUARIO" \
   --data-urlencode "password=TU_CONTRASEÑA" \
   --data-urlencode "service=moodle_mobile_app"
@@ -167,7 +167,7 @@ Si en cambio aparece un `"error"`, revisa [Problemas comunes](#problemas-comunes
 **5. Prueba que funciona:**
 
 ```sh
-MOODLE_URL=https://moodle.tu-escuela.edu .venv/bin/python -c "import server; print(server.info_usuario())"
+MOODLE_URL=https://mi.cugdl.udg.mx .venv/bin/python -c "import server; print(server.info_usuario())"
 ```
 
 Debe mostrar tu nombre y el de tu escuela.
@@ -177,7 +177,7 @@ Debe mostrar tu nombre y el de tu escuela.
 - **Claude Code:**
 
   ```sh
-  claude mcp add --scope user moodle -e MOODLE_URL=https://moodle.tu-escuela.edu -- "$HOME/moodle-mcp/.venv/bin/python" "$HOME/moodle-mcp/server.py"
+  claude mcp add --scope user moodle -e MOODLE_URL=https://mi.cugdl.udg.mx -- "$HOME/moodle-mcp/.venv/bin/python" "$HOME/moodle-mcp/server.py"
   ```
 
 - **Claude Desktop:** abre **Configuración → Desarrollador → Editar configuración** (el archivo es `~/Library/Application Support/Claude/claude_desktop_config.json`) y agrega esto. Cambia `TU_USUARIO_DE_MAC` (lo ves con `whoami`):
@@ -188,7 +188,7 @@ Debe mostrar tu nombre y el de tu escuela.
       "moodle": {
         "command": "/Users/TU_USUARIO_DE_MAC/moodle-mcp/.venv/bin/python",
         "args": ["/Users/TU_USUARIO_DE_MAC/moodle-mcp/server.py"],
-        "env": { "MOODLE_URL": "https://moodle.tu-escuela.edu" }
+        "env": { "MOODLE_URL": "https://mi.cugdl.udg.mx" }
       }
     }
   }
@@ -216,7 +216,7 @@ Debe mostrar tu nombre y el de tu escuela.
 
 | Variable | Obligatoria | Qué es |
 |---|---|---|
-| `MOODLE_URL` | Sí | Dirección de tu Moodle, p. ej. `https://moodle.tu-escuela.edu` |
+| `MOODLE_URL` | Sí | Dirección de tu Moodle, p. ej. `https://mi.cugdl.udg.mx` |
 | `MOODLE_TOKEN` | No | Token; si no está, se lee de `MOODLE_TOKEN_FILE` |
 | `MOODLE_TOKEN_FILE` | No | Archivo con el token (por defecto `~/.moodle_token`) |
 | `MOODLE_DOWNLOAD_DIR` | No | Carpeta de descargas (por defecto `~/Downloads/Moodle`) |
